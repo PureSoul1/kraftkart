@@ -1,0 +1,2989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="KraftKart - India's Premier Multi-vendor E-commerce Marketplace with COD, UPI Payments & Live Delivery Tracking">
+    <meta name="keywords" content="e-commerce, online shopping, marketplace, COD, UPI, delivery tracking, multi-vendor">
+    <meta name="author" content="Agentic Fox Labs">
+    
+    <title>KraftKart - Multi-vendor Marketplace | Agentic Fox Labs</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ============================================
+           CSS CUSTOM PROPERTIES (Design System)
+           ============================================ */
+        :root {
+            --color-primary-gradient-start: #6366f1;
+            --color-primary-gradient-end: #8b5cf6;
+            --color-secondary-accent: #f59e0b;
+            --color-success-green: #10b981;
+            --color-background-dark: #0f172a;
+            --color-background-light: #f8fafc;
+            --color-card-background: #ffffff;
+            --color-text-primary: #1e293b;
+            --color-text-secondary: #64748b;
+            --color-border-color: #e2e8f0;
+            
+            --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-strong: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-card-hover: 0 20px 40px rgba(99, 102, 241, 0.15);
+            --shadow-button-glow: 0 0 20px rgba(139, 92, 246, 0.4);
+            --shadow-modal-overlay: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            
+            --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-family-heading: 'Poppins', sans-serif;
+            --font-size-hero: clamp(2.5rem, 5vw, 4rem);
+            --font-size-h2: clamp(1.75rem, 3vw, 2.5rem);
+            --font-size-body: 1rem;
+            --font-size-small: 0.875rem;
+            --font-weight-bold: 700;
+            --font-weight-medium: 500;
+            --line-height-relaxed: 1.7;
+            
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2.5rem;
+            --space-xl: 4rem;
+            --space-xxl: 6rem;
+            --container-max-width: 1280px;
+            --grid-gap: 2rem;
+            
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+            
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        body {
+            font-family: var(--font-family-primary);
+            font-size: var(--font-size-body);
+            line-height: var(--line-height-relaxed);
+            color: var(--color-text-primary);
+            background-color: var(--color-background-light);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-family-heading);
+            font-weight: var(--font-weight-bold);
+            line-height: 1.2;
+            color: var(--color-text-primary);
+        }
+        
+        a { text-decoration: none; color: inherit; transition: var(--transition-smooth); }
+        img { max-width: 100%; height: auto; display: block; }
+        button { font-family: inherit; cursor: pointer; border: none; outline: none; background: none; }
+        ul, ol { list-style: none; }
+        
+        .container {
+            width: 100%;
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--color-primary-gradient-start), var(--color-primary-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            padding: 0.875rem 2rem;
+            font-size: var(--font-size-body);
+            font-weight: var(--font-weight-medium);
+            border-radius: var(--radius-full);
+            transition: var(--transition-smooth);
+            min-height: 44px;
+            min-width: 44px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-primary-gradient-start), var(--color-primary-gradient-end));
+            color: white;
+            box-shadow: var(--shadow-soft);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-button-glow);
+        }
+        
+        *:focus-visible {
+            outline: 2px solid var(--color-primary-gradient-start);
+            outline-offset: 2px;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+            transition: var(--transition-smooth);
+        }
+        
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow-soft);
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem var(--space-md);
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-family-heading);
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--color-text-primary);
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--color-primary-gradient-start), var(--color-primary-gradient-end));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            font-weight: var(--font-weight-medium);
+            color: var(--color-text-secondary);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, var(--color-primary-gradient-start), var(--color-primary-gradient-end));
+            transition: var(--transition-smooth);
+        }
+        
+        .nav-link:hover { color: var(--color-text-primary); }
+        .nav-link:hover::after { width: 100%; }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .icon-btn {
+            position: relative;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-full);
+            color: var(--color-text-secondary);
+            font-size: 1.25rem;
+            transition: var(--transition-smooth);
+            background: transparent;
+        }
+        
+        .icon-btn:hover {
+            background: var(--color-background-light);
+            color: var(--color-primary-gradient-start);
+        }
+        
+        .badge {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 18px;
+            height: 18px;
+            background: linear-gradient(135deg, var(--color-primary-gradient-start), var(--color-primary-gradient-end));
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white;
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            width: 28px;
+            height: 20px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+        
+        .hamburger span {
+            width: 100%;
+            height: 3px;
+            background: var(--color-text-primary);
+            border-radius: 2px;
+            transition: var(--transition-smooth);
+        }
+        
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: var(--shadow-modal-overlay);
+            z-index: 2000;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 6rem 2rem 2rem;
+            overflow-y: auto;
+        }
+        
+        .mobile-menu.active { right: 0; }
+        
+        .mobile-nav-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .mobile-nav-link {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--color-border-color);
+            display: block;
+        }
+        
+        .mobile-nav-link:hover { color: var(--color-primary-gradient-start); }
+        
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.5);
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-smooth);
+        }
+        
+        .mobile-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .hamburger { display: flex; }
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            overflow: hidden;
+            padding: var(--space-xl) var(--space-md);
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 40% 20%, rgba(245, 158, 11, 0.08) 0%, transparent 35%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+        
+        .hero-container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 900px;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.25rem;
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: var(--radius-full);
+            color: #a5b4fc;
+            font-size: var(--font-size-small);
+            font-weight: 500;
+            margin-bottom: var(--space-lg);
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .hero-title {
+            font-size: var(--font-size-hero);
+            font-weight: 800;
+            color: white;
+            margin-bottom: var(--space-md);
+            line-height: 1.1;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        .hero-title-highlight {
+            background: linear-gradient(135deg, var(--color-primary-gradient-start), var(--color-primary-gradient-end), var(--color-secondary-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+        }
+        
+        @keyframes shimmer {
+            to { background-position: 200% center; }
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.125rem, 2vw, 1.375rem);
+            color: #94a3b8;
+            margin-bottom: var(--space-xl);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+        
+        .btn-hero-primary {
+            background: linear-gradient(135deg, var(--color-primary-gradient-start), var(--color-primary-gradient-end));
+            color: white;
+            padding: 1rem 2.5rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            border-radius: var(--radius-full);
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+            transition: var(--transition-smooth);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .btn-hero-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.6);
+        }
+        
+        .btn-hero-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem 2.5rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            border-radius: var(--radius-full);
+            transition: var(--transition-smooth);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .btn-hero-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-3px);
+        }
+        
+        .floating-products {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 5;
+        }
+        
+        .floating-card {
+            position: absolute;
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 1rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-card:nth-child(1) { top: 15%; left: 8%; animation-delay: 0s; }
+        .floating-card:nth-child(2) { top: 25%; right: 10%; animation-delay: 1.5s; }
+        .floating-card:nth-child(3) { bottom: 20%; left: 12%; animation-delay: 3s; }
+        .floating-card:nth-child(4) { bottom: 25%; right: 8%; animation-delay: 4.5s; }
+        
+        .floating-card-image {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+        
+        .floating-card-title { font-size: 0.8rem; font-weight: 600; color: var(--color-text-primary); }
+        .floating-card-price { font-size: 0.9rem; font-weight: 700; color: var(--color-primary-gradient-start); }
+        
+        .geo-shape {
+            position: absolute;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        .geo-shape-1 {
+            width: 300px;
+            height: 300px;
+            border: 2px solid var(--color-primary-gradient-start);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .geo-shape-2 {
+            width: 200px;
+            height: 200px;
+            background: var(--color-secondary-accent);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            bottom: 10%;
+            left: 5%;
+            animation: float 7s ease-in-out infinite reverse;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: var(--space-xl);
+            animation: fadeInUp 0.8s ease-out 0.8s both;
+        }
+        
+        .stat-item { text-align: center; }
+        .stat-number {
+            font-family: var(--font-family-heading);
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            display: block;
+        }
+        .stat-label { font-size: var(--font-size-small); color: #94a3b8; }
+        
+        @media (max-width: 768px) {
+            .hero { min-height: auto; padding: 8rem var(--space-md) var(--space-xl); }
+            .floating-card { display: none; }
+            .hero-stats { flex-direction: column; gap: 1.5rem; }
+            .hero-buttons { flex-direction: column; align-items: stretch; }
+        }
+
+        /* Products Section */
+        .products-section {
+            background: var(--color-background-light);
+            padding: var(--space-xxl) 0;
+        }
+
+        .products-header { text-align: center; margin-bottom: var(--space-xl); }
+        .products-subtitle {
+            display: inline-block;
+            font-size: var(--font-size-small);
+            font-weight: 600;
+            color: var(--color-primary-gradient-start);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--space-sm);
+        }
+        .products-title { font-size: var(--font-size-h2); margin-bottom: var(--space-md); }
+        .products-description { color: var(--color-text-secondary); max-width: 600px; margin: 0 auto; }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--grid-gap);
+            margin-top: var(--space-lg);
+        }
+
+        .product-card {
+            background: var(--color-card-background);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition-smooth);
+            position: relative;
+            border: 1px solid var(--color-border-color);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-card-hover);
+            border-color: transparent;
+        }
+
+        .product-image-container {
+            position: relative;
+            width: 100%;
+            padding-top: 100%;
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            overflow: hidden;
+        }
+
+        .product-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--color-primary-gradient-start);
+            transition: var(--transition-smooth);
+        }
+
+        .product-card:hover .product-image { transform: scale(1.05); }
+
+        .product-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: linear-gradient(135deg, var(--color-primary-gradient-start), var(--color-primary-gradient-end));
+            color: white;
+            padding: 0.35rem 0.85rem;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 10;
+        }
+
+        .product-wishlist {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 36px;
+            height: 36px;
+            background: white;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-secondary);
+            box-shadow: var(--shadow-soft);
+            z-index: 10;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .product-card:hover .product-wishlist { opacity: 1; transform: scale(1); }
+        .product-wishlist:hover { color: #ef4444; }
+
+        .product-quick-view {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent);
+            padding: 2rem 1rem 1rem;
+            transform: translateY(100%);
+            transition: var(--transition-smooth);
+            z-index: 5;
+        }
+
+        .product-card:hover .product-quick-view { transform: translateY(0); }
+
+        .btn-quick-view {
+            width: 100%;
+            background: white;
+            color: var(--color-text-primary);
+            padding: 0.65rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: var(--font-size-small);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-quick-view:hover { background: var(--color-primary-gradient-start); color: white; }
+
+        .product-info { padding: 1.25rem; }
+        .product-category {
+            font-size: 0.8rem;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-name {
+            font-family: var(--font-family-heading);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-rating { display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.75rem; }
+        .stars { display: flex; gap: 2px; color: #fbbf24; font-size: 0.85rem; }
+        .rating-count { font-size: 0.85rem; color: var(--color-text-secondary); }
+
+        .product-price { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+        .price-current {
+            font-family: var(--font-family-heading);
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--color-primary-gradient-start);
+        }
+        .price-original { font-size: 1rem; color: var(--color-text-secondary); text-decoration: line-through; }
+        .price-discount {
+            background: #dc2626;
+            color: white;
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .btn-add-cart {
+            width: 100%;
+            background: linear-gradient(135deg, var(--color-primary-gradient-start), var(--color-primary-gradient-end));
+            color: white;
+            padding: 0.875rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: var(--font-size-body);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            border: none;
+        }
+
+        .btn-add-cart:hover { transform: translateY(-2px); box-shadow: var(--shadow-button-glow); }
+
+        .stock-status { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 500; margin-top: 0.75rem; }
+        .stock-in { color: var(--color-success-green); }
+        .stock-low { color: var(--color-secondary-accent); }
+        .stock-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+        @media (max-width: 1024px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 768px) { .products-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; } }
+        @media (max-width: 480px) { .products-grid { grid-template-columns: 1fr; } }
+
+        /* Features Section */
+        .features-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            padding: var(--space-xxl) 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .features-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        .features-container { position: relative; z-index: 10; }
+        .features-header { text-align: center; margin-bottom: var(--space-xl); }
+        .features-subtitle {
+            display: inline-block;
+            font-size: var(--font-size-small);
+            font-weight: 600;
+            color: #a5b4fc;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: var(--space-sm);
+        }
+        .features-title { font-size: var(--font-size-h2); color: white; margin-bottom: var(--space-md); }
+        .features-description { color: #94a3b8; max-width: 650px; margin: 0 auto; font-size: 1.125rem; }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--grid-gap);
+            margin-top: var(--space-lg);
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-primary-gradient-start), var(--color-primary-gradient-end));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
+        }
+
+        .feature-card:hover::before { transform: scaleX(1); }
+
+        .feature-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.25rem;
+            color: #a5b4fc;
+            transition: var(--transition-smooth);
+        }
+
+        .feature-card:hover .feature-icon-wrapper {
+            background: linear-gradient(135deg, var(--color-primary-gradient-start), var(--color-primary-gradient-end));
+            color: white;
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .feature-title { font-family: var(--font-family-heading); font-size: 1.35rem; font-weight: 700; color: white; margin-bottom: 0.75rem; }
+        .feature-description { color: #94a3b8; line-height: 1.7; font-size: 0.95rem; }
+
+        @media (max-width: 968px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) {
+            .features-grid { grid-template-columns: 1fr; }
+            .feature-card { padding: 2rem 1.5rem; }
+        }
+
+        /* Payment Section */
+        .payment-section { background: var(--color-background-light); padding: var(--space-xxl) 0; }
+        .payment-header { text-align: center; margin-bottom: var(--space-xl); }
+        .payment-subtitle {
+            display: inline-block;
+            font-size: var(--font-size-small);
+            font-weight: 600;
+            color: var(--color-primary-gradient-start);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--space-sm);
+        }
+        .payment-title { font-size: var(--font-size-h2); margin-bottom: var(--space-md); }
+        .payment-description { color: var(--color-text-secondary); max-width: 650px; margin: 0 auto; }
+
+        .payment-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--grid-gap);
+            align-items: start;
+            margin-top: var(--space-lg);
+        }
+
+        .payment-options-panel {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-strong);
+            border: 1px solid var(--color-border-color);
+        }
+
+        .payment-options-title {
+            font-family: var(--font-family-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .payment-options-title i { color: var(--color-primary-gradient-start); }
+
+        .payment-option {
+            border: 2px solid var(--color-border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 1.25rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .payment-option:hover { border-color: var(--color-primary-gradient-start); background: rgba(99, 102, 241, 0.02); }
+        .payment-option.selected { border-color: var(--color-primary-gradient-start); background: rgba(99, 102, 241, 0.05); }
+
+        .payment-option-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
+        .payment-option-label { display: flex; align-items: center; gap: 0.75rem; font-weight: 600; font-size: 1.1rem; }
+
+        .payment-option-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .radio-custom {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--color-border-color);
+            border-radius: 50%;
+            position: relative;
+            transition: var(--transition-smooth);
+        }
+
+        .payment-option.selected .radio-custom { border-color: var(--color-success-green); }
+        .payment-option.selected .radio-custom::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            background: var(--color-success-green);
+            border-radius: 50%;
+        }
+
+        .payment-option-description { color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.6; padding-left: 60px; }
+
+        .upi-section { margin-top: 1.5rem; }
+        .upi-qr-container {
+            background: #f8fafc;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .upi-qr-code {
+            width: 180px;
+            height: 180px;
+            background: white;
+            border: 3px solid var(--color-border-color);
+            border-radius: var(--radius-md);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--color-text-secondary);
+        }
+
+        .upi-instructions { font-size: 0.9rem; color: var(--color-text-secondary); margin-bottom: 1rem; }
+
+        .upi-apps { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+        .upi-app-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: white;
+            border: 1px solid var(--color-border-color);
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .upi-app-badge.gpay { color: #4285F4; }
+        .upi-app-badge.phonepe { color: #5f259f; }
+        .upi-app-badge.paytm { color: #00baf2; }
+        .upi-app-badge.bhim { color: #00a0e3; }
+
+        .checkout-preview-panel {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-strong);
+            border: 1px solid var(--color-border-color);
+        }
+
+        .checkout-preview-title {
+            font-family: var(--font-family-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .checkout-preview-title i { color: var(--color-primary-gradient-end); }
+
+        .order-summary { background: #f8fafc; border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.5rem; }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--color-border-color);
+        }
+
+        .order-item:last-child { border-bottom: none; }
+        .order-item-name { font-weight: 500; }
+        .order-item-price { font-weight: 600; color: var(--color-text-primary); }
+
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 0 0;
+            margin-top: 0.75rem;
+            border-top: 2px solid var(--color-text-primary);
+            font-family: var(--font-family-heading);
+            font-size: 1.35rem;
+            font-weight: 800;
+        }
+
+        .order-total-amount { color: var(--color-primary-gradient-start); }
+
+        .btn-place-order {
+            width: 100%;
+            background: linear-gradient(135deg, var(--color-primary-gradient-start), var(--color-primary-gradient-end));
+            color: white;
+            padding: 1.125rem;
+            border-radius: var(--radius-lg);
+            font-size: 1.125rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            border: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-place-order:hover { transform: translateY(-2px); box-shadow: var(--shadow-button-glow); }
+
+        .security-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--color-border-color);
+        }
+
+        .security-badge { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--color-text-secondary); font-weight: 500; }
+        .security-badge i { color: var(--color-success-green); font-size: 1.125rem; }
+
+        .trust-indicators { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.5rem; }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: rgba(16, 185, 129, 0.08);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(16, 185, 129, 0.15);
+        }
+
+        .trust-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--color-success-green);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .trust-text { font-size: 0.9rem; font-weight: 600; color: var(--color-text-primary); }
+
+        @media (max-width: 968px) { .payment-container { grid-template-columns: 1fr; } }
+
+        /* Tracking Section */
+        .tracking-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            padding: var(--space-xxl) 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tracking-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        .tracking-container { position: relative; z-index: 10; }
+        .tracking-header { text-align: center; margin-bottom: var(--space-xl); }
+        .tracking-subtitle {
+            display: inline-block;
+            font-size: var(--font-size-small);
+            font-weight: 600;
+            color: #10b981;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--space-sm);
+        }
+        .tracking-title { font-size: var(--font-size-h2); color: white; margin-bottom: var(--space-md); }
+        .tracking-description { color: #94a3b8; max-width: 650px; margin: 0 auto; }
+
+        .tracking-interface {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: var(--grid-gap);
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-modal-overlay);
+            margin-top: var(--space-lg);
+        }
+
+        .tracking-left-panel { border-right: 1px solid var(--color-border-color); padding-right: 2rem; }
+        .order-id-input-group { margin-bottom: 2rem; }
+        .order-id-label { display: block; font-weight: 600; color: var(--color-text-primary); margin-bottom: 0.5rem; font-size: 0.95rem; }
+
+        .order-id-input-wrapper { display: flex; gap: 0.75rem; }
+
+        .order-id-input {
+            flex: 1;
+            padding: 0.875rem 1.25rem;
+            border: 2px solid var(--color-border-color);
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition-smooth);
+        }
+
+        .order-id-input:focus {
+            outline: none;
+            border-color: var(--color-primary-gradient-start);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .btn-track {
+            padding: 0.875rem 1.75rem;
+            background: linear-gradient(135deg, var(--color-primary-gradient-start), var(--color-primary-gradient-end));
+            color: white;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            white-space: nowrap;
+            border: none;
+        }
+
+        .btn-track:hover { transform: translateY(-2px); box-shadow: var(--shadow-button-glow); }
+
+        .timeline-section-title { font-family: var(--font-family-heading); font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--color-text-primary); }
+
+        .timeline { position: relative; padding-left: 30px; }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--color-success-green), var(--color-border-color));
+        }
+
+        .timeline-item { position: relative; padding-bottom: 2rem; }
+        .timeline-item:last-child { padding-bottom: 0; }
+
+        .timeline-marker {
+            position: absolute;
+            left: -30px;
+            top: 4px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--color-success-green);
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--color-success-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+            z-index: 5;
+        }
+
+        .timeline-marker.pending { background: var(--color-border-color); box-shadow: 0 0 0 2px var(--color-border-color); }
+        .timeline-marker.active { animation: pulse 2s ease-in-out infinite; box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.3); }
+
+        .timeline-content { background: #f8fafc; padding: 1rem 1.25rem; border-radius: var(--radius-md); border-left: 3px solid var(--color-success-green); }
+        .timeline-content.pending { border-left-color: var(--color-border-color); opacity: 0.7; }
+        .timeline-content.active { border-left-color: var(--color-primary-gradient-start); background: rgba(99, 102, 241, 0.05); }
+
+        .timeline-title { font-weight: 700; font-size: 1rem; color: var(--color-text-primary); margin-bottom: 0.25rem; }
+        .timeline-time { font-size: 0.85rem; color: var(--color-text-secondary); }
+        .timeline-description { font-size: 0.9rem; color: var(--color-text-secondary); margin-top: 0.35rem; }
+
+        .tracking-right-panel { padding-left: 2rem; }
+
+        .map-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+            border-radius: var(--radius-lg);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            border: 2px solid var(--color-border-color);
+        }
+
+        .map-route-line {
+            position: absolute;
+            top: 50%;
+            left: 15%;
+            right: 20%;
+            height: 3px;
+            background: repeating-linear-gradient(to right, var(--color-primary-gradient-start) 0, var(--color-primary-gradient-start) 10px, transparent 10px, transparent 20px);
+            transform: translateY(-50%) rotate(-5deg);
+        }
+
+        .map-marker-start {
+            position: absolute;
+            top: 45%;
+            left: 12%;
+            width: 32px;
+            height: 32px;
+            background: var(--color-primary-gradient-start);
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+
+        .map-marker-start i { transform: rotate(45deg); color: white; font-size: 0.85rem; }
+
+        .map-marker-end {
+            position: absolute;
+            top: 40%;
+            right: 17%;
+            width: 36px;
+            height: 36px;
+            background: var(--color-success-green);
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .map-marker-end i { transform: rotate(45deg); color: white; font-size: 0.9rem; }
+
+        .map-marker-current {
+            position: absolute;
+            top: 42%;
+            left: 55%;
+            width: 28px;
+            height: 28px;
+            background: #f59e0b;
+            border: 3px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.5);
+            animation: float 3s ease-in-out infinite;
+            z-index: 10;
+        }
+
+        .map-marker-current i { color: white; font-size: 0.75rem; }
+
+        .map-label {
+            position: absolute;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            background: white;
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .map-label.warehouse { top: 52%; left: 8%; }
+        .map-label.destination { top: 35%; right: 12%; }
+
+        .delivery-eta-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 1.5rem;
+        }
+
+        .delivery-eta-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--color-success-green);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .delivery-eta-info { flex: 1; }
+        .delivery-eta-label { font-size: 0.85rem; color: var(--color-text-secondary); margin-bottom: 0.25rem; }
+        .delivery-eta-time { font-family: var(--font-family-heading); font-size: 1.35rem; font-weight: 800; color: var(--color-success-green); }
+
+        .driver-card { background: #f8fafc; border: 1px solid var(--color-border-color); border-radius: var(--radius-lg); padding: 1.5rem; }
+        .driver-card-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+
+        .driver-avatar {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--color-primary-gradient-start), var(--color-primary-gradient-end));
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .driver-info h4 { font-family: var(--font-family-heading); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem; }
+        .driver-rating { display: flex; align-items: center; gap: 0.35rem; color: #fbbf24; font-size: 0.9rem; }
+        .driver-actions { display: flex; gap: 0.75rem; }
+
+        .btn-driver-action {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-call { background: var(--color-success-green); color: white; }
+        .btn-call:hover { background: #059669; transform: translateY(-2px); }
+        .btn-message { background: var(--color-primary-gradient-start); color: white; }
+        .btn-message:hover { background: #4f46e5; transform: translateY(-2px); }
+
+        @media (max-width: 968px) {
+            .tracking-interface { grid-template-columns: 1fr; }
+            .tracking-left-panel { border-right: none; border-bottom: 1px solid var(--color-border-color); padding-right: 0; padding-bottom: 2rem; }
+            .tracking-right-panel { padding-left: 0; padding-top: 2rem; }
+        }
+
+        /* Dashboard Section */
+        .dashboard-section { background: var(--color-background-light); padding: var(--space-xxl) 0; }
+        .dashboard-header { text-align: center; margin-bottom: var(--space-xl); }
+        .dashboard-subtitle {
+            display: inline-block;
+            font-size: var(--font-size-small);
+            font-weight: 600;
+            color: var(--color-primary-gradient-start);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--space-sm);
+        }
+        .dashboard-title { font-size: var(--font-size-h2); margin-bottom: var(--space-md); }
+        .dashboard-description { color: var(--color-text-secondary); max-width: 650px; margin: 0 auto; }
+
+        .browser-frame {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: var(--radius-xl);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            border: 1px solid var(--color-border-color);
+        }
+
+        .browser-chrome {
+            background: #f1f5f9;
+            padding: 0.875rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-bottom: 1px solid var(--color-border-color);
+        }
+
+        .browser-dots { display: flex; gap: 6px; }
+        .browser-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .browser-dot.red { background: #ef4444; }
+        .browser-dot.yellow { background: #f59e0b; }
+        .browser-dot.green { background: #10b981; }
+
+        .browser-address-bar {
+            flex: 1;
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+            border: 1px solid var(--color-border-color);
+        }
+
+        .browser-address-bar i { color: var(--color-success-green); }
+
+        .dashboard-layout { display: grid; grid-template-columns: 240px 1fr; min-height: 600px; }
+
+        .dashboard-sidebar { background: #f8fafc; border-right: 1px solid var(--color-border-color); padding: 1.5rem 0; }
+        .sidebar-logo { padding: 0 1.5rem 1.5rem; border-bottom: 1px solid var(--color-border-color); margin-bottom: 1rem; }
+
+        .sidebar-logo-text {
+            font-family: var(--font-family-heading);
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--color-text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--color-primary-gradient-start), var(--color-primary-gradient-end));
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.875rem;
+        }
+
+        .sidebar-nav { display: flex; flex-direction: column; gap: 0.25rem; padding: 0 0.75rem; }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-md);
+            color: var(--color-text-secondary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition-smooth);
+        }
+
+        .sidebar-link:hover { background: white; color: var(--color-text-primary); }
+
+        .sidebar-link.active {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            color: var(--color-primary-gradient-start);
+            font-weight: 600;
+            border-left: 3px solid var(--color-primary-gradient-start);
+        }
+
+        .sidebar-link i { width: 20px; text-align: center; }
+
+        .dashboard-main { padding: 2rem; background: white; }
+        .dashboard-welcome { margin-bottom: 2rem; }
+        .dashboard-welcome h2 { font-family: var(--font-family-heading); font-size: 1.75rem; font-weight: 700; margin-bottom: 0.35rem; }
+        .dashboard-welcome p { color: var(--color-text-secondary); }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-bottom: 2rem; }
+
+        .stat-card {
+            background: #f8fafc;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            border: 1px solid var(--color-border-color);
+            transition: var(--transition-smooth);
+        }
+
+        .stat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-soft); border-color: transparent; }
+
+        .stat-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
+
+        .stat-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.125rem;
+            color: white;
+        }
+
+        .stat-card-icon.revenue { background: linear-gradient(135deg, #10b981, #059669); }
+        .stat-card-icon.orders { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+        .stat-card-icon.products { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .stat-card-icon.rating { background: linear-gradient(135deg, #ec4899, #db2777); }
+
+        .stat-trend {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-full);
+        }
+
+        .stat-trend.up { color: #059669; background: rgba(16, 185, 129, 0.1); }
+        .stat-trend.down { color: #dc2626; background: rgba(220, 38, 38, 0.1); }
+
+        .stat-value { font-family: var(--font-family-heading); font-size: 1.75rem; font-weight: 800; color: var(--color-text-primary); margin-bottom: 0.25rem; }
+        .stat-label { font-size: 0.85rem; color: var(--color-text-secondary); }
+
+        .dashboard-content-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 1.5rem; }
+
+        .orders-table-container { background: #f8fafc; border-radius: var(--radius-lg); padding: 1.5rem; border: 1px solid var(--color-border-color); }
+        .table-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
+        .table-title { font-family: var(--font-family-heading); font-size: 1.15rem; font-weight: 700; }
+        .btn-view-all { font-size: 0.875rem; font-weight: 600; color: var(--color-primary-gradient-start); cursor: pointer; }
+        .btn-view-all:hover { text-decoration: underline; }
+
+        table { width: 100%; border-collapse: collapse; }
+        th {
+            text-align: left;
+            padding: 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--color-border-color);
+        }
+
+        td { padding: 0.875rem 0.75rem; font-size: 0.9rem; border-bottom: 1px solid var(--color-border-color); }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: white; }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-badge.delivered { background: rgba(16, 185, 129, 0.1); color: #059669; }
+        .status-badge.processing { background: rgba(99, 102, 241, 0.1); color: #6366f1; }
+        .status-badge.shipped { background: rgba(245, 158, 11, 0.1); color: #d97706; }
+
+        .chart-container { background: #f8fafc; border-radius: var(--radius-lg); padding: 1.5rem; border: 1px solid var(--color-border-color); }
+
+        .chart-placeholder {
+            height: 200px;
+            position: relative;
+            margin-top: 1rem;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding: 1rem 0.5rem;
+            border-left: 2px solid var(--color-border-color);
+            border-bottom: 2px solid var(--color-border-color);
+        }
+
+        .chart-bar-wrapper { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; flex: 1; }
+
+        .chart-bar {
+            width: 40px;
+            background: linear-gradient(to top, var(--color-primary-gradient-start), var(--color-primary-gradient-end));
+            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+            transition: var(--transition-smooth);
+            opacity: 0.8;
+        }
+
+        .chart-bar:hover { opacity: 1; transform: scaleY(1.05); transform-origin: bottom; }
+        .chart-label { font-size: 0.75rem; color: var(--color-text-secondary); font-weight: 500; }
+
+        @media (max-width: 1100px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .dashboard-content-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-layout { grid-template-columns: 1fr; }
+            .dashboard-sidebar { display: none; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .orders-table-container { overflow-x: auto; }
+            table { min-width: 500px; }
+        }
+
+        /* Tech Section */
+        .tech-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            padding: var(--space-xxl) 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 30% 70%, rgba(99, 102, 241, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(139, 92, 246, 0.08) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        .tech-container { position: relative; z-index: 10; }
+        .tech-header { text-align: center; margin-bottom: var(--space-xl); }
+        .tech-subtitle {
+            display: inline-block;
+            font-size: var(--font-size-small);
+            font-weight: 600;
+            color: #a5b4fc;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: var(--space-sm);
+        }
+        .tech-title { font-size: var(--font-size-h2); color: white; margin-bottom: var(--space-md); }
+        .tech-description { color: #94a3b8; max-width: 650px; margin: 0 auto; }
+
+        .tech-badges-container { margin-top: var(--space-lg); margin-bottom: var(--space-xl); }
+
+        .tech-badges-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .tech-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.5rem 1.25rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            transition: var(--transition-smooth);
+            cursor: default;
+            position: relative;
+            min-width: 110px;
+        }
+
+        .tech-badge:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+        }
+
+        .tech-badge::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: white;
+            color: var(--color-text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-strong);
+            z-index: 100;
+        }
+
+        .tech-badge:hover::after { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+
+        .tech-icon-wrapper {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            color: #a5b4fc;
+            transition: var(--transition-smooth);
+        }
+
+        .tech-badge:hover .tech-icon-wrapper {
+            background: linear-gradient(135deg, var(--color-primary-gradient-start), var(--color-primary-gradient-end));
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .tech-name { font-size: 0.9rem; font-weight: 600; color: white; text-align: center; }
+
+        .performance-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--grid-gap);
+            margin-top: var(--space-lg);
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-primary-gradient-start), var(--color-primary-gradient-end));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.15);
+        }
+
+        .metric-card:hover::before { transform: scaleX(1); }
+
+        .metric-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1.25rem;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1));
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            color: #6ee7b7;
+        }
+
+        .metric-value { font-family: var(--font-family-heading); font-size: 2.75rem; font-weight: 800; color: white; margin-bottom: 0.5rem; line-height: 1; }
+        .metric-label { font-size: 1rem; color: #94a3b8; font-weight: 500; }
+        .metric-description { font-size: 0.9rem; color: #64748b; margin-top: 0.5rem; line-height: 1.5; }
+
+        @media (max-width: 968px) {
+            .performance-metrics { grid-template-columns: repeat(2, 1fr); }
+            .tech-badges-row { gap: 1rem; }
+            .tech-badge { min-width: 95px; padding: 1.25rem 1rem; }
+        }
+
+        @media (max-width: 640px) {
+            .performance-metrics { grid-template-columns: 1fr; }
+            .tech-badges-row { gap: 0.75rem; padding: 1.5rem 1rem; }
+            .tech-badge { min-width: 80px; padding: 1rem 0.75rem; }
+            .tech-icon-wrapper { width: 48px; height: 48px; font-size: 1.5rem; }
+            .metric-value { font-size: 2.25rem; }
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #94a3b8;
+            padding-top: var(--space-xxl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-primary-gradient-start), var(--color-primary-gradient-end), var(--color-secondary-accent));
+        }
+
+        .footer-container { position: relative; z-index: 10; }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+            gap: var(--grid-gap);
+            padding-bottom: var(--space-xl);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-brand { padding-right: 2rem; }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--color-primary-gradient-start), var(--color-primary-gradient-end));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.35rem;
+        }
+
+        .footer-logo-text { font-family: var(--font-family-heading); font-size: 1.75rem; font-weight: 800; color: white; }
+        .footer-description { line-height: 1.8; margin-bottom: 1.5rem; font-size: 0.95rem; }
+
+        .footer-social { display: flex; gap: 0.75rem; }
+
+        .social-link {
+            width: 42px;
+            height: 42px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            font-size: 1.125rem;
+            transition: var(--transition-smooth);
+        }
+
+        .social-link:hover {
+            background: linear-gradient(135deg, var(--color-primary-gradient-start), var(--color-primary-gradient-end));
+            color: white;
+            transform: translateY(-3px);
+            border-color: transparent;
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .footer-column h3 {
+            font-family: var(--font-family-heading);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.25rem;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-primary-gradient-start), var(--color-primary-gradient-end));
+        }
+
+        .footer-links { display: flex; flex-direction: column; gap: 0.85rem; }
+
+        .footer-link {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            transition: var(--transition-smooth);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-link:hover { color: white; padding-left: 0.5rem; }
+        .footer-link i { font-size: 0.75rem; opacity: 0; transition: var(--transition-smooth); }
+        .footer-link:hover i { opacity: 1; }
+
+        .contact-item { display: flex; align-items: flex-start; gap: 0.875rem; margin-bottom: 1.25rem; }
+
+        .contact-icon {
+            width: 38px;
+            height: 38px;
+            background: rgba(99, 102, 241, 0.15);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a5b4fc;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+
+        .contact-info h4 { color: white; font-weight: 600; font-size: 0.95rem; margin-bottom: 0.25rem; }
+        .contact-info p, .contact-info a { color: #94a3b8; font-size: 0.9rem; line-height: 1.6; }
+        .contact-info a:hover { color: #a5b4fc; }
+
+        .newsletter-form { margin-top: 1.5rem; }
+        .newsletter-label { color: white; font-weight: 600; margin-bottom: 0.75rem; display: block; }
+        .newsletter-input-group { display: flex; gap: 0.5rem; }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-md);
+            color: white;
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: var(--transition-smooth);
+        }
+
+        .newsletter-input::placeholder { color: #64748b; }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--color-primary-gradient-start);
+            background: rgba(99, 102, 241, 0.08);
+        }
+
+        .btn-newsletter {
+            padding: 0.75rem 1.25rem;
+            background: linear-gradient(135deg, var(--color-primary-gradient-start), var(--color-primary-gradient-end));
+            color: white;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            white-space: nowrap;
+            border: none;
+        }
+
+        .btn-newsletter:hover { transform: translateY(-2px); box-shadow: var(--shadow-button-glow); }
+
+        .footer-bottom {
+            padding: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .copyright { color: #64748b; font-size: 0.9rem; }
+        .copyright strong { color: #94a3b8; }
+
+        .footer-bottom-links { display: flex; gap: 2rem; }
+        .footer-bottom-link { color: #64748b; font-size: 0.9rem; transition: var(--transition-smooth); }
+        .footer-bottom-link:hover { color: #a5b4fc; }
+
+        @media (max-width: 1024px) {
+            .footer-main { grid-template-columns: repeat(2, 1fr); }
+            .footer-brand { grid-column: 1 / -1; padding-right: 0; max-width: 500px; }
+        }
+
+        @media (max-width: 640px) {
+            .footer-main { grid-template-columns: 1fr; gap: 2rem; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-bottom-links { flex-direction: column; gap: 0.75rem; }
+            .newsletter-input-group { flex-direction: column; }
+        }
+
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--color-primary-gradient-start), var(--color-primary-gradient-end));
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: var(--transition-smooth);
+            box-shadow: var(--shadow-button-glow);
+            z-index: 999;
+        }
+
+        .scroll-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .scroll-to-top:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5); }
+
+        @media print {
+            .header, .footer, .scroll-to-top, .floating-products { display: none !important; }
+            body { background: white; color: black; }
+            .hero { min-height: auto; padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header" id="header">
+        <div class="header-container">
+            <a href="#" class="logo">
+                <div class="logo-icon"><i class="fas fa-shopping-bag"></i></div>
+                <span>KraftKart</span>
+            </a>
+            
+            <nav class="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#products" class="nav-link">Products</a>
+                <a href="#categories" class="nav-link">Categories</a>
+                <a href="#vendors" class="nav-link">Vendors</a>
+                <a href="#tracking" class="nav-link">Track Order</a>
+            </nav>
+            
+            <div class="header-actions">
+                <button class="icon-btn" aria-label="Search"><i class="fas fa-search"></i></button>
+                <button class="icon-btn" aria-label="Shopping Cart with 3 items">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge">3</span>
+                </button>
+                <button class="icon-btn" aria-label="User Account"><i class="fas fa-user-circle"></i></button>
+                <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    
+    <!-- Mobile Navigation Drawer -->
+    <nav class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-nav-list">
+            <li><a href="#home" class="mobile-nav-link">Home</a></li>
+            <li><a href="#products" class="mobile-nav-link">Products</a></li>
+            <li><a href="#categories" class="mobile-nav-link">Categories</a></li>
+            <li><a href="#vendors" class="mobile-nav-link">Vendors</a></li>
+            <li><a href="#tracking" class="mobile-nav-link">Track Order</a></li>
+            <li><a href="#" class="mobile-nav-link">My Account</a></li>
+            <li><a href="#" class="mobile-nav-link">Wishlist</a></li>
+            <li><a href="#" class="mobile-nav-link">Help & Support</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main style="padding-top: 80px;">
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="geo-shape geo-shape-1"></div>
+            <div class="geo-shape geo-shape-2"></div>
+            
+            <div class="floating-products">
+                <div class="floating-card">
+                    <div class="floating-card-image"><i class="fas fa-tshirt" style="color: #6366f1;"></i></div>
+                    <div class="floating-card-title">Premium T-Shirt</div>
+                    <div class="floating-card-price">₹999</div>
+                </div>
+                <div class="floating-card">
+                    <div class="floating-card-image"><i class="fas fa-laptop" style="color: #8b5cf6;"></i></div>
+                    <div class="floating-card-title">Laptop Stand</div>
+                    <div class="floating-card-price">₹2,499</div>
+                </div>
+                <div class="floating-card">
+                    <div class="floating-card-image"><i class="fas fa-headphones" style="color: #f59e0b;"></i></div>
+                    <div class="floating-card-title">Wireless Earbuds</div>
+                    <div class="floating-card-price">₹3,499</div>
+                </div>
+                <div class="floating-card">
+                    <div class="floating-card-image"><i class="fas fa-watch" style="color: #10b981;"></i></div>
+                    <div class="floating-card-title">Smart Watch</div>
+                    <div class="floating-card-price">₹8,999</div>
+                </div>
+            </div>
+            
+            <div class="hero-container">
+                <div class="hero-badge"><i class="fas fa-star"></i><span>India's Fastest Growing Marketplace</span></div>
+                
+                <h1 class="hero-title">Shop Smart with<br><span class="hero-title-highlight">KraftKart</span></h1>
+                
+                <p class="hero-subtitle">India's premier multi-vendor e-commerce platform featuring COD payments, UPI integration, real-time delivery tracking & trusted vendors nationwide</p>
+                
+                <div class="hero-buttons">
+                    <a href="#products" class="btn-hero-primary"><i class="fas fa-shopping-bag"></i> Start Shopping</a>
+                    <a href="#vendors" class="btn-hero-secondary"><i class="fas fa-store"></i> Become a Vendor</a>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat-item"><span class="stat-number">50K+</span><span class="stat-label">Products</span></div>
+                    <div class="stat-item"><span class="stat-number">10K+</span><span class="stat-label">Vendors</span></div>
+                    <div class="stat-item"><span class="stat-number">1M+</span><span class="stat-label">Happy Customers</span></div>
+                    <div class="stat-item"><span class="stat-number">500+</span><span class="stat-label">Cities Served</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section class="products-section" id="products">
+            <div class="container">
+                <div class="products-header">
+                    <span class="products-subtitle">Curated Collection</span>
+                    <h2 class="products-title">Trending <span class="gradient-text">Products</span></h2>
+                    <p class="products-description">Discover handpicked products from India's top vendors with best prices and quality assurance</p>
+                </div>
+
+                <div class="products-grid">
+                    <!-- Product Cards (8 Products) -->
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <span class="product-badge">Bestseller</span>
+                            <button class="product-wishlist" aria-label="Add to wishlist"><i class="far fa-heart"></i></button>
+                            <div class="product-image"><i class="fas fa-mobile-alt"></i></div>
+                            <div class="product-quick-view"><button class="btn-quick-view">Quick View</button></div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Electronics</div>
+                            <h3 class="product-name">Smartphone Pro Max 128GB</h3>
+                            <div class="product-rating">
+                                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                                <span class="rating-count">(245)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price-current">₹45,999</span>
+                                <span class="price-original">₹55,999</span>
+                                <span class="price-discount">18% OFF</span>
+                            </div>
+                            <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                            <div class="stock-status stock-in"><span class="stock-dot"></span> In Stock</div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <span class="product-badge">New</span>
+                            <button class="product-wishlist" aria-label="Add to wishlist"><i class="far fa-heart"></i></button>
+                            <div class="product-image"><i class="fas fa-headphones-alt"></i></div>
+                            <div class="product-quick-view"><button class="btn-quick-view">Quick View</button></div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Audio</div>
+                            <h3 class="product-name">Wireless Noise Cancelling Headphones</h3>
+                            <div class="product-rating">
+                                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                <span class="rating-count">(189)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price-current">₹12,499</span>
+                                <span class="price-original">₹16,999</span>
+                                <span class="price-discount">26% OFF</span>
+                            </div>
+                            <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                            <div class="stock-status stock-in"><span class="stock-dot"></span> In Stock</div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <button class="product-wishlist" aria-label="Add to wishlist"><i class="far fa-heart"></i></button>
+                            <div class="product-image"><i class="fas fa-tshirt"></i></div>
+                            <div class="product-quick-view"><button class="btn-quick-view">Quick View</button></div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Fashion</div>
+                            <h3 class="product-name">Premium Cotton Casual T-Shirt</h3>
+                            <div class="product-rating">
+                                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+                                <span class="rating-count">(98)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price-current">₹899</span>
+                                <span class="price-original">₹1,499</span>
+                                <span class="price-discount">40% OFF</span>
+                            </div>
+                            <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                            <div class="stock-status stock-low"><span class="stock-dot"></span> Only 5 Left</div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <span class="product-badge">Hot Deal</span>
+                            <button class="product-wishlist" aria-label="Add to wishlist"><i class="far fa-heart"></i></button>
+                            <div class="product-image"><i class="fas fa-laptop"></i></div>
+                            <div class="product-quick-view"><button class="btn-quick-view">Quick View</button></div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Computers</div>
+                            <h3 class="product-name">Ultra-Slim Laptop Stand Aluminum</h3>
+                            <div class="product-rating">
+                                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                                <span class="rating-count">(156)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price-current">₹2,499</span>
+                                <span class="price-original">₹3,999</span>
+                                <span class="price-discount">37% OFF</span>
+                            </div>
+                            <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                            <div class="stock-status stock-in"><span class="stock-dot"></span> In Stock</div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <button class="product-wishlist" aria-label="Add to wishlist"><i class="far fa-heart"></i></button>
+                            <div class="product-image"><i class="fas fa-watch"></i></div>
+                            <div class="product-quick-view"><button class="btn-quick-view">Quick View</button></div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Wearables</div>
+                            <h3 class="product-name">Fitness Smart Watch with Heart Monitor</h3>
+                            <div class="product-rating">
+                                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                <span class="rating-count">(312)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price-current">₹8,999</span>
+                                <span class="price-original">₹12,999</span>
+                                <span class="price-discount">31% OFF</span>
+                            </div>
+                            <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                            <div class="stock-status stock-in"><span class="stock-dot"></span> In Stock</div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <span class="product-badge">Limited</span>
+                            <button class="product-wishlist" aria-label="Add to wishlist"><i class="far fa-heart"></i></button>
+                            <div class="product-image"><i class="fas fa-camera"></i></div>
+                            <div class="product-quick-view"><button class="btn-quick-view">Quick View</button></div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Photography</div>
+                            <h3 class="product-name">4K Action Camera Waterproof</h3>
+                            <div class="product-rating">
+                                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+                                <span class="rating-count">(87)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price-current">₹18,499</span>
+                                <span class="price-original">₹24,999</span>
+                                <span class="price-discount">26% OFF</span>
+                            </div>
+                            <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                            <div class="stock-status stock-low"><span class="stock-dot"></span> Only 3 Left</div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <button class="product-wishlist" aria-label="Add to wishlist"><i class="far fa-heart"></i></button>
+                            <div class="product-image"><i class="fas fa-couch"></i></div>
+                            <div class="product-quick-view"><button class="btn-quick-view">Quick View</button></div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Home & Living</div>
+                            <h3 class="product-name">Ergonomic Office Chair Mesh Back</h3>
+                            <div class="product-rating">
+                                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                                <span class="rating-count">(203)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price-current">₹14,999</span>
+                                <span class="price-original">₹19,999</span>
+                                <span class="price-discount">25% OFF</span>
+                            </div>
+                            <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                            <div class="stock-status stock-in"><span class="stock-dot"></span> In Stock</div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <span class="product-badge">Trending</span>
+                            <button class="product-wishlist" aria-label="Add to wishlist"><i class="far fa-heart"></i></button>
+                            <div class="product-image"><i class="fas fa-gamepad"></i></div>
+                            <div class="product-quick-view"><button class="btn-quick-view">Quick View</button></div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Gaming</div>
+                            <h3 class="product-name">Wireless Gaming Controller RGB</h3>
+                            <div class="product-rating">
+                                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                <span class="rating-count">(428)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price-current">₹3,999</span>
+                                <span class="price-original">₹5,499</span>
+                                <span class="price-discount">27% OFF</span>
+                            </div>
+                            <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                            <div class="stock-status stock-in"><span class="stock-dot"></span> In Stock</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section" id="features">
+            <div class="container features-container">
+                <div class="features-header">
+                    <span class="features-subtitle">Platform Advantages</span>
+                    <h2 class="features-title">Why Choose <span style="background: linear-gradient(135deg, #a5b4fc, #c4b5fd); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">KraftKart</span>?</h2>
+                    <p class="features-description">Built specifically for Indian shoppers and sellers with features that make online shopping seamless, secure, and delightful</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper"><i class="fas fa-money-bill-wave"></i></div>
+                        <h3 class="feature-title">Cash on Delivery</h3>
+                        <p class="feature-description">Pay when you receive! Trusted COD option available across 500+ Indian cities. No advance payment needed – inspect your order before paying.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper"><i class="fas fa-qrcode"></i></div>
+                        <h3 class="feature-title">UPI Integration</h3>
+                        <p class="feature-description">Instant payments via Google Pay, PhonePe, Paytm & all major UPI apps. Zero transaction fees, instant confirmation, and hassle-free checkout experience.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper"><i class="fas fa-map-marked-alt"></i></div>
+                        <h3 class="feature-title">Live Delivery Tracking</h3>
+                        <p class="feature-description">Real-time GPS tracking from warehouse to doorstep. Get instant notifications, estimated delivery time, and direct contact with delivery partner.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper"><i class="fas fa-store-alt"></i></div>
+                        <h3 class="feature-title">Multi-Vendor Marketplace</h3>
+                        <p class="feature-description">Shop from 10,000+ verified vendors across India. Compare prices, read authentic reviews, and discover unique products from local businesses nationwide.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper"><i class="fas fa-shield-alt"></i></div>
+                        <h3 class="feature-title">100% Secure Payments</h3>
+                        <p class="feature-description">Bank-grade SSL encryption, PCI DSS compliance, and Razorpay integration. Your transactions are protected with multi-layer security protocols.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper"><i class="fas fa-headset"></i></div>
+                        <h3 class="feature-title">24/7 Customer Support</h3>
+                        <p class="feature-description">Round-the-clock assistance in Hindi & English via chat, phone & email. Easy returns, quick refunds, and dedicated resolution team for all queries.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment Methods Section -->
+        <section class="payment-section" id="payment">
+            <div class="container">
+                <div class="payment-header">
+                    <span class="payment-subtitle">Flexible Payment Options</span>
+                    <h2 class="payment-title">Secure & Convenient <span class="gradient-text">Payments</span></h2>
+                    <p class="payment-description">Multiple payment options designed for Indian customers – pay the way you prefer with complete security assurance</p>
+                </div>
+
+                <div class="payment-container">
+                    <div class="payment-options-panel">
+                        <h3 class="payment-options-title"><i class="fas fa-credit-card"></i> Select Payment Method</h3>
+
+                        <div class="payment-option selected">
+                            <div class="payment-option-header">
+                                <div class="payment-option-label">
+                                    <div class="payment-option-icon"><i class="fas fa-money-bill-wave"></i></div>
+                                    <span>Cash on Delivery (COD)</span>
+                                </div>
+                                <div class="radio-custom"></div>
+                            </div>
+                            <p class="payment-option-description">Pay cash when your order arrives. Available in 500+ cities across India. No extra charges – inspect before you pay!</p>
+                        </div>
+
+                        <div class="payment-option">
+                            <div class="payment-option-header">
+                                <div class="payment-option-label">
+                                    <div class="payment-option-icon" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);"><i class="fas fa-qrcode"></i></div>
+                                    <span>UPI Payment</span>
+                                </div>
+                                <div class="radio-custom"></div>
+                            </div>
+                            <p class="payment-option-description">Instant payment via any UPI app. Scan QR code or enter UPI ID for quick checkout.</p>
+                            <div class="upi-section">
+                                <div class="upi-qr-container">
+                                    <div class="upi-qr-code"><i class="fas fa-qrcode"></i></div>
+                                    <p class="upi-instructions">Scan this QR code with any UPI app to pay</p>
+                                    <div class="upi-apps">
+                                        <div class="upi-app-badge gpay"><i class="fab fa-google-pay"></i> GPay</div>
+                                        <div class="upi-app-badge phonepe"><i class="fas fa-mobile-alt"></i> PhonePe</div>
+                                        <div class="upi-app-badge paytm"><i class="fas fa-wallet"></i> Paytm</div>
+                                        <div class="upi-app-badge bhim"><i class="fas fa-university"></i> BHIM</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="trust-indicators">
+                            <div class="trust-item"><div class="trust-icon"><i class="fas fa-shield-alt"></i></div><span class="trust-text">100% Secure</span></div>
+                            <div class="trust-item"><div class="trust-icon"><i class="fas fa-undo"></i></div><span class="trust-text">Easy Returns</span></div>
+                        </div>
+                    </div>
+
+                    <div class="checkout-preview-panel">
+                        <h3 class="checkout-preview-title"><i class="fas fa-receipt"></i> Order Summary</h3>
+                        <div class="order-summary">
+                            <div class="order-item"><span class="order-item-name">Smartphone Pro Max × 1</span><span class="order-item-price">₹45,999</span></div>
+                            <div class="order-item"><span class="order-item-name">Wireless Headphones × 1</span><span class="order-item-price">₹12,499</span></div>
+                            <div class="order-item"><span class="order-item-name">Premium T-Shirt × 2</span><span class="order-item-price">₹1,798</span></div>
+                            <div class="order-item"><span class="order-item-name">Laptop Stand × 1</span><span class="order-item-price">₹2,499</span></div>
+                            <div class="order-item"><span class="order-item-name">Subtotal</span><span class="order-item-price">₹62,795</span></div>
+                            <div class="order-item"><span class="order-item-name">Delivery Charges</span><span class="order-item-price" style="color: var(--color-success-green);">FREE</span></div>
+                            <div class="order-item"><span class="order-item-name">Discount Applied</span><span class="order-item-price" style="color: #dc2626;">-₹6,280</span></div>
+                            <div class="order-total"><span>Total Amount</span><span class="order-total-amount">₹56,515</span></div>
+                        </div>
+                        <button class="btn-place-order"><i class="fas fa-lock"></i> Place Secure Order</button>
+                        <div class="security-badges">
+                            <div class="security-badge"><i class="fas fa-lock"></i> SSL Encrypted</div>
+                            <div class="security-badge"><i class="fas fa-check-circle"></i> PCI DSS Compliant</div>
+                            <div class="security-badge"><i class="fas fa-shield-alt"></i> Razorpay Secure</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tracking Section -->
+        <section class="tracking-section" id="tracking">
+            <div class="container tracking-container">
+                <div class="tracking-header">
+                    <span class="tracking-subtitle">Real-Time Updates</span>
+                    <h2 class="tracking-title">Live Delivery <span style="background: linear-gradient(135deg, #6ee7b7, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Tracking</span></h2>
+                    <p class="tracking-description">Track your orders in real-time from warehouse to doorstep with GPS-enabled delivery updates and direct driver contact</p>
+                </div>
+
+                <div class="tracking-interface">
+                    <div class="tracking-left-panel">
+                        <div class="order-id-input-group">
+                            <label class="order-id-label" for="orderId">Enter Your Order ID</label>
+                            <div class="order-id-input-wrapper">
+                                <input type="text" id="orderId" class="order-id-input" value="KK2024011547892" placeholder="Enter order ID">
+                                <button class="btn-track"><i class="fas fa-search-location"></i> Track</button>
+                            </div>
+                        </div>
+                        <h3 class="timeline-section-title">Order Status</h3>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-marker"><i class="fas fa-check"></i></div>
+                                <div class="timeline-content">
+                                    <div class="timeline-title">Order Placed</div>
+                                    <div class="timeline-time">Jan 15, 2024 • 10:30 AM</div>
+                                    <div class="timeline-description">Your order has been successfully placed</div>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker"><i class="fas fa-check"></i></div>
+                                <div class="timeline-content">
+                                    <div class="timeline-title">Order Confirmed</div>
+                                    <div class="timeline-time">Jan 15, 2024 • 11:15 AM</div>
+                                    <div class="timeline-description">Vendor confirmed your order and preparing for shipment</div>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker"><i class="fas fa-check"></i></div>
+                                <div class="timeline-content">
+                                    <div class="timeline-title">Shipped</div>
+                                    <div class="timeline-time">Jan 15, 2024 • 03:45 PM</div>
+                                    <div class="timeline-description">Package picked up by delivery partner - BlueDart Express</div>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker active"><i class="fas fa-truck"></i></div>
+                                <div class="timeline-content active">
+                                    <div class="timeline-title">Out for Delivery</div>
+                                    <div class="timeline-time">Jan 16, 2024 • 09:20 AM</div>
+                                    <div class="timeline-description">Your package is on the way! Expected to arrive today</div>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker pending"><i class="fas fa-home"></i></div>
+                                <div class="timeline-content pending">
+                                    <div class="timeline-title">Delivered</div>
+                                    <div class="timeline-time">Expected: Today by 06:00 PM</div>
+                                    <div class="timeline-description">Waiting for delivery completion</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tracking-right-panel">
+                        <div class="map-placeholder">
+                            <div class="map-route-line"></div>
+                            <div class="map-marker-start"><i class="fas fa-warehouse"></i></div>
+                            <div class="map-marker-current"><i class="fas fa-truck"></i></div>
+                            <div class="map-marker-end"><i class="fas fa-home"></i></div>
+                            <div class="map-label warehouse">Warehouse</div>
+                            <div class="map-label destination">Your Location</div>
+                        </div>
+                        <div class="delivery-eta-badge">
+                            <div class="delivery-eta-icon"><i class="fas fa-clock"></i></div>
+                            <div class="delivery-eta-info">
+                                <div class="delivery-eta-label">Estimated Arrival</div>
+                                <div class="delivery-eta-time">Today, 04:30 PM - 06:00 PM</div>
+                            </div>
+                        </div>
+                        <div class="driver-card">
+                            <div class="driver-card-header">
+                                <div class="driver-avatar"><i class="fas fa-user"></i></div>
+                                <div class="driver-info">
+                                    <h4>Rajesh Kumar</h4>
+                                    <div class="driver-rating"><i class="fas fa-star"></i><span>4.8</span><span style="color: var(--color-text-secondary); margin-left: 0.25rem;">(1,234 deliveries)</span></div>
+                                </div>
+                            </div>
+                            <div class="driver-actions">
+                                <button class="btn-driver-action btn-call"><i class="fas fa-phone-alt"></i> Call Driver</button>
+                                <button class="btn-driver-action btn-message"><i class="fas fa-comment-alt"></i> Message</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section class="dashboard-section" id="vendors">
+            <div class="container">
+                <div class="dashboard-header">
+                    <span class="dashboard-subtitle">Vendor Portal</span>
+                    <h2 class="dashboard-title">Powerful <span class="gradient-text">Seller Dashboard</span></h2>
+                    <p class="dashboard-description">Manage your store, track orders, analyze performance, and grow your business with our comprehensive vendor management system</p>
+                </div>
+
+                <div class="browser-frame">
+                    <div class="browser-chrome">
+                        <div class="browser-dots"><span class="browser-dot red"></span><span class="browser-dot yellow"></span><span class="browser-dot green"></span></div>
+                        <div class="browser-address-bar"><i class="fas fa-lock"></i><span>vendor.kraftkart.in/dashboard</span></div>
+                    </div>
+                    <div class="dashboard-layout">
+                        <aside class="dashboard-sidebar">
+                            <div class="sidebar-logo">
+                                <div class="sidebar-logo-text">
+                                    <div class="sidebar-logo-icon"><i class="fas fa-store"></i></div>
+                                    KraftKart
+                                </div>
+                            </div>
+                            <nav class="sidebar-nav">
+                                <a href="#" class="sidebar-link active"><i class="fas fa-chart-line"></i> Dashboard</a>
+                                <a href="#" class="sidebar-link"><i class="fas fa-box"></i> Products</a>
+                                <a href="#" class="sidebar-link"><i class="fas fa-shopping-bag"></i> Orders</a>
+                                <a href="#" class="sidebar-link"><i class="fas fa-chart-pie"></i> Analytics</a>
+                                <a href="#" class="sidebar-link"><i class="fas fa-users"></i> Customers</a>
+                                <a href="#" class="sidebar-link"><i class="fas fa-cog"></i> Settings</a>
+                            </nav>
+                        </aside>
+                        <main class="dashboard-main">
+                            <div class="dashboard-welcome">
+                                <h2>Welcome back, FashionFab! 👋</h2>
+                                <p>Here's what's happening with your store today</p>
+                            </div>
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <div class="stat-card-header">
+                                        <div class="stat-card-icon revenue"><i class="fas fa-rupee-sign"></i></div>
+                                        <div class="stat-trend up"><i class="fas fa-arrow-up"></i> +12.5%</div>
+                                    </div>
+                                    <div class="stat-value">₹2.4L</div>
+                                    <div class="stat-label">Total Revenue</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-card-header">
+                                        <div class="stat-card-icon orders"><i class="fas fa-shopping-cart"></i></div>
+                                        <div class="stat-trend up"><i class="fas fa-arrow-up"></i> +8.2%</div>
+                                    </div>
+                                    <div class="stat-value">384</div>
+                                    <div class="stat-label">Total Orders</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-card-header">
+                                        <div class="stat-card-icon products"><i class="fas fa-box"></i></div>
+                                        <div class="stat-trend up"><i class="fas fa-arrow-up"></i> +24</div>
+                                    </div>
+                                    <div class="stat-value">156</div>
+                                    <div class="stat-label">Products Listed</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-card-header">
+                                        <div class="stat-card-icon rating"><i class="fas fa-star"></i></div>
+                                        <div class="stat-trend up"><i class="fas fa-arrow-up"></i> +0.3</div>
+                                    </div>
+                                    <div class="stat-value">4.8</div>
+                                    <div class="stat-label">Avg. Rating</div>
+                                </div>
+                            </div>
+                            <div class="dashboard-content-grid">
+                                <div class="orders-table-container">
+                                    <div class="table-header">
+                                        <h3 class="table-title">Recent Orders</h3>
+                                        <a href="#" class="btn-view-all">View All →</a>
+                                    </div>
+                                    <table>
+                                        <thead>
+                                            <tr><th>Order ID</th><th>Customer</th><th>Amount</th><th>Status</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td><strong>#KK78234</strong></td><td>Rahul Sharma</td><td><strong>₹4,999</strong></td><td><span class="status-badge delivered"><i class="fas fa-check-circle"></i> Delivered</span></td></tr>
+                                            <tr><td><strong>#KK78233</strong></td><td>Priya Patel</td><td><strong>₹12,499</strong></td><td><span class="status-badge shipped"><i class="fas fa-truck"></i> Shipped</span></td></tr>
+                                            <tr><td><strong>#KK78232</strong></td><td>Amit Kumar</td><td><strong>₹2,299</strong></td><td><span class="status-badge processing"><i class="fas fa-clock"></i> Processing</span></td></tr>
+                                            <tr><td><strong>#KK78231</strong></td><td>Sneha Gupta</td><td><strong>₹8,750</strong></td><td><span class="status-badge delivered"><i class="fas fa-check-circle"></i> Delivered</span></td></tr>
+                                            <tr><td><strong>#KK78230</strong></td><td>Vikram Singh</td><td><strong>₹15,999</strong></td><td><span class="status-badge shipped"><i class="fas fa-truck"></i> Shipped</span></td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="chart-container">
+                                    <div class="table-header">
+                                        <h3 class="table-title">Weekly Sales</h3>
+                                        <span style="font-size: 0.875rem; color: var(--color-text-secondary);">This Week</span>
+                                    </div>
+                                    <div class="chart-placeholder">
+                                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 60%;"></div><span class="chart-label">Mon</span></div>
+                                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 80%;"></div><span class="chart-label">Tue</span></div>
+                                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 45%;"></div><span class="chart-label">Wed</span></div>
+                                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 90%;"></div><span class="chart-label">Thu</span></div>
+                                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 70%;"></div><span class="chart-label">Fri</span></div>
+                                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 100%;"></div><span class="chart-label">Sat</span></div>
+                                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 55%;"></div><span class="chart-label">Sun</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Stack Section -->
+        <section class="tech-section" id="technology">
+            <div class="container tech-container">
+                <div class="tech-header">
+                    <span class="tech-subtitle">Enterprise-Grade Infrastructure</span>
+                    <h2 class="tech-title">Built for <span style="background: linear-gradient(135deg, #6ee7b7, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Performance</span></h2>
+                    <p class="tech-description">Powered by cutting-edge technology stack ensuring blazing-fast performance, scalability, and reliability for millions of users</p>
+                </div>
+
+                <div class="tech-badges-container">
+                    <div class="tech-badges-row">
+                        <div class="tech-badge" data-tooltip="Frontend Framework"><div class="tech-icon-wrapper"><i class="fab fa-react"></i></div><span class="tech-name">React.js</span></div>
+                        <div class="tech-badge" data-tooltip="Backend Runtime"><div class="tech-icon-wrapper"><i class="fab fa-node-js"></i></div><span class="tech-name">Node.js</span></div>
+                        <div class="tech-badge" data-tooltip="Database"><div class="tech-icon-wrapper" style="color: #47a248;"><i class="fas fa-database"></i></div><span class="tech-name">MongoDB</span></div>
+                        <div class="tech-badge" data-tooltip="Caching Layer"><div class="tech-icon-wrapper" style="color: #dc382d;"><i class="fas fa-bolt"></i></div><span class="tech-name">Redis</span></div>
+                        <div class="tech-badge" data-tooltip="Cloud Infrastructure"><div class="tech-icon-wrapper" style="color: #ff9900;"><i class="fab fa-aws"></i></div><span class="tech-name">AWS Cloud</span></div>
+                        <div class="tech-badge" data-tooltip="Containerization"><div class="tech-icon-wrapper" style="color: #2496ed;"><i class="fab fa-docker"></i></div><span class="tech-name">Docker</span></div>
+                        <div class="tech-badge" data-tooltip="Payment Gateway"><div class="tech-icon-wrapper" style="color: #2d6df6;"><i class="fas fa-credit-card"></i></div><span class="tech-name">Razorpay</span></div>
+                        <div class="tech-badge" data-tooltip="API Architecture"><div class="tech-icon-wrapper"><i class="fas fa-code"></i></div><span class="tech-name">REST APIs</span></div>
+                    </div>
+                </div>
+
+                <div class="performance-metrics">
+                    <div class="metric-card">
+                        <div class="metric-icon"><i class="fas fa-server"></i></div>
+                        <div class="metric-value">99.9%</div>
+                        <div class="metric-label">Uptime Guarantee</div>
+                        <p class="metric-description">Enterprise-grade reliability with automatic failover systems</p>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        <div class="metric-value">&lt;2s</div>
+                        <div class="metric-label">Load Time</div>
+                        <p class="metric-description">Lightning-fast page loads with CDN optimization globally</p>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <div class="metric-value">100%</div>
+                        <div class="metric-label">Mobile Optimized</div>
+                        <p class="metric-description">Responsive design perfected for all devices and screen sizes</p>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon"><i class="fas fa-search"></i></div>
+                        <div class="metric-value">A+</div>
+                        <div class="metric-label">SEO Score</div>
+                        <p class="metric-description">Optimized for search engines with structured data markup</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <div class="footer-logo-icon"><i class="fas fa-shopping-bag"></i></div>
+                        <span class="footer-logo-text">KraftKart</span>
+                    </div>
+                    <p class="footer-description">India's premier multi-vendor e-commerce platform connecting millions of shoppers with trusted vendors nationwide. Experience seamless shopping with COD, UPI payments, and real-time delivery tracking.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" class="footer-link"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="#" class="footer-link"><i class="fas fa-chevron-right"></i> Careers</a></li>
+                        <li><a href="#" class="footer-link"><i class="fas fa-chevron-right"></i> Blog</a></li>
+                        <li><a href="#" class="footer-link"><i class="fas fa-chevron-right"></i> Press & Media</a></li>
+                        <li><a href="#" class="footer-link"><i class="fas fa-chevron-right"></i> Become a Vendor</a></li>
+                        <li><a href="#" class="footer-link"><i class="fas fa-chevron-right"></i> Affiliate Program</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" class="footer-link"><i class="fas fa-chevron-right"></i> Help Center</a></li>
+                        <li><a href="#" class="footer-link"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+                        <li><a href="#" class="footer-link"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                        <li><a href="#" class="footer-link"><i class="fas fa-chevron-right"></i> Return Policy</a></li>
+                        <li><a href="#" class="footer-link"><i class="fas fa-chevron-right"></i> Shipping Info</a></li>
+                        <li><a href="#" class="footer-link"><i class="fas fa-chevron-right"></i> Track Order</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-info"><h4>Email Us</h4><a href="mailto:support@kraftkart.in">support@kraftkart.in</a></div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div class="contact-info"><h4>Call Us</h4><p>+91 1800-123-4567 (Toll Free)</p></div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="contact-info"><h4>Office Address</h4><p>123 Tech Park, Sector 62,<br>Noida, UP - 201301, India</p></div>
+                    </div>
+                    <form class="newsletter-form">
+                        <label class="newsletter-label" for="newsletterEmail">Subscribe to Updates</label>
+                        <div class="newsletter-input-group">
+                            <input type="email" id="newsletterEmail" class="newsletter-input" placeholder="Enter your email">
+                            <button type="submit" class="btn-newsletter"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="copyright">© 2024 <strong>KraftKart</strong>. All rights reserved. Built with ❤️ by <strong>Agentic Fox Labs</strong></p>
+                <div class="footer-bottom-links">
+                    <a href="#" class="footer-bottom-link">Privacy Policy</a>
+                    <a href="#" class="footer-bottom-link">Terms of Service</a>
+                    <a href="#" class="footer-bottom-link">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollTopBtn" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Header scroll effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) header.classList.add('scrolled');
+                else header.classList.remove('scrolled');
+            });
+
+            // Mobile menu toggle
+            const hamburger = document.getElementById('hamburger');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileOverlay = document.getElementById('mobileOverlay');
+
+            function toggleMobileMenu() {
+                hamburger.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                mobileOverlay.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            }
+
+            hamburger.addEventListener('click', toggleMobileMenu);
+            mobileOverlay.addEventListener('click', toggleMobileMenu);
+
+            document.querySelectorAll('.mobile-nav-link').forEach(link => link.addEventListener('click', toggleMobileMenu));
+
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerHeight = header.offsetHeight;
+                        window.scrollTo({ top: targetElement.offsetTop - headerHeight - 20, behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // Scroll to top button
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 500) scrollTopBtn.classList.add('visible');
+                else scrollTopBtn.classList.remove('visible');
+            });
+
+            scrollTopBtn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Payment option selection
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+
+            // Add to cart feedback
+            document.querySelectorAll('.btn-add-cart').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-check"></i> Added!';
+                    this.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                    setTimeout(() => { this.innerHTML = originalText; this.style.background = ''; }, 2000);
+                });
+            });
+
+            // Wishlist toggle
+            document.querySelectorAll('.product-wishlist').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const icon = this.querySelector('i');
+                    if (icon.classList.contains('far')) {
+                        icon.classList.remove('far'); icon.classList.add('fas');
+                        this.style.color = '#ef4444'; this.style.transform = 'scale(1.2)';
+                    } else {
+                        icon.classList.remove('fas'); icon.classList.add('far');
+                        this.style.color = ''; this.style.transform = '';
+                    }
+                    setTimeout(() => { this.style.transform = ''; }, 200);
+                });
+            });
+
+            // Newsletter form
+            const newsletterForm = document.querySelector('.newsletter-form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const input = this.querySelector('.newsletter-input');
+                    const btn = this.querySelector('.btn-newsletter');
+                    if (input.value.trim()) {
+                        const originalBtn = btn.innerHTML;
+                        btn.innerHTML = '<i class="fas fa-check"></i>';
+                        btn.style.background = '#10b981';
+                        input.value = '';
+                        input.placeholder = 'Thank you for subscribing!';
+                        setTimeout(() => { btn.innerHTML = originalBtn; btn.style.background = ''; input.placeholder = 'Enter your email'; }, 3000);
+                    }
+                });
+            }
+
+            // Track order button
+            const trackBtn = document.querySelector('.btn-track');
+            if (trackBtn) {
+                trackBtn.addEventListener('click', function() {
+                    const orderIdInput = document.getElementById('orderId');
+                    if (orderIdInput.value.trim()) {
+                        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Tracking...';
+                        this.disabled = true;
+                        setTimeout(() => {
+                            this.innerHTML = '<i class="fas fa-search-location"></i> Track';
+                            this.disabled = false;
+                            alert(`Tracking Order ID: ${orderIdInput.value}\n\nStatus: Out for Delivery\nETA: Today, 04:30 PM - 06:00 PM`);
+                        }, 1500);
+                    }
+                });
+            }
+
+            // Place order button
+            const placeOrderBtn = document.querySelector('.btn-place-order');
+            if (placeOrderBtn) {
+                placeOrderBtn.addEventListener('click', function() {
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                    this.disabled = true;
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fas fa-check-circle"></i> Order Placed Successfully!';
+                        this.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                        setTimeout(() => { this.innerHTML = originalText; this.style.background = ''; this.disabled = false; }, 3000);
+                    }, 2000);
+                });
+            }
+
+            console.log('%c🚀 KraftKart by Agentic Fox Labs - E-commerce Platform Loaded Successfully!', 'color: #6366f1; font-size: 14px; font-weight: bold;');
+        });
+    </script>
+</body>
+</html>
